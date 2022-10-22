@@ -6,8 +6,6 @@ const postVerificationOTP = (req, res)=>{
     const {_id} = req.user;
     const {otp} = req.body;
 
-    console.log(otp);
-
     verificationOTP.findOne({_id}, (err, doc)=>{
         if(!err){
             if(!doc){

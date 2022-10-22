@@ -16,7 +16,7 @@ const verifyUser = (req, res, next) =>{
                 return res.status(401).json({"msg": "Unauthorized Access."});
             }
             if(payload){
-                req.user = {_id: payload.id, email: payload.email, name: payload.name};
+                req.user = {_id: payload.id, email: payload.email, name: payload.name, verified: payload.verified};
                 next();
             }
         });

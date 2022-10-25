@@ -1,9 +1,12 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import user from "../models/user.js";
 
 dotenv.config();
 
 const verifyUser = (req, res, next) =>{
+
+
     if(req.headers){
         if(!req.headers.authorization){
             return res.status(401).json({"msg": "Unauthorized Access."});
@@ -15,9 +18,15 @@ const verifyUser = (req, res, next) =>{
             if(err){
                 return res.status(401).json({"msg": "Unauthorized Access."});
             }
+            
             if(payload){
-                req.user = {_id: payload.id, email: payload.email, name: payload.name, verified: payload.verified};
-                next();
+                
+                if(!payload.id || !payload.email || !payload.name){
+                    return res.status(401).json({"msg": "Unauthorized Accesss."});
+                }else{
+                    req.user = {_id: payload.id, email: payload.email, name: payload.name};
+                    next();
+                }
             }
         });
     }else{

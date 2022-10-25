@@ -25,7 +25,6 @@ const postGenerateOTP = (req, res)=>{
 
     verificationOTP.findOne({id: _id}, (err, doc)=>{
         if(err){
-            console.log(err);
             return res.status(501).json({msg: "Something went wrong"});
         }
         if(doc){
@@ -37,8 +36,10 @@ const postGenerateOTP = (req, res)=>{
                    genOTP();
                 }
             });
+        }if(!doc){
+            genOTP();
         }
-        genOTP();
+        
     })
 }
 

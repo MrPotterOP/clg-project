@@ -22,7 +22,7 @@ const postLogin = (req, res)=>{
                         if(!result){
                             return res.status(401).json({msg: "Invalid Information."});
                         }else{
-                            jwt.sign({name: d.name, id: d._id, email: d.email}, process.env.JWTSECKEY, { expiresIn: '2d' }, (error, token)=>{
+                            jwt.sign({name: doc.name, id: doc._id, email: doc.email}, process.env.JWTSECKEY, { expiresIn: '2d' }, (error, token)=>{
                                 if(!err){
                                     if(!token){
                                         return res.status(501).json({msg: "Something Went Wrong."});

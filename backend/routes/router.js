@@ -8,13 +8,13 @@ import postGenerateOTP from "../controllers/postGenerateOTP.js";
 import postLogin from "../controllers/postLogin.js";
 import postTest from "../controllers/postTest.js";
 import checkUser from "../middleware/checkUser.js";
+import getInstitutes from "../controllers/getInstitutes.js";
 
 const router = express.Router();
 
 
-router.get("/online", (req, res)=>{
-    res.send({"msg": "Server is up and running.."});
-});
+router.get("/institutes", getInstitutes);
+
 
 
 router.post("/register", postUser);

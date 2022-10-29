@@ -4,7 +4,13 @@ import sendMail from "./sendMail.js";
 
 
 const postGenerateOTP = (req, res)=>{
-    const {_id, email, name} = req.user;
+    const {_id, email, name, verified} = req.user;
+
+    if(verified){
+        return res.status(400).json({msg: "Alredy Verified, No need to verify."});
+    }
+
+    console.log(verified);
 
     const genOTP = ()=>{
                     let OTP = "";

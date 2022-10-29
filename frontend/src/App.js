@@ -6,6 +6,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import SignIn from "./components/signUpIn/SignIn";
 import SignUpIN from "./components/signUpIn/SignUpIn";
 import Login from "./components/signUpIn/Login";
+import VerificationOTP from "./components/verification/VerificationOTP";
 
 
 const App = ()=>{
@@ -15,6 +16,7 @@ const App = ()=>{
             <Route path="/register" element={<SignIn />} exact></Route>
             <Route path="/login" element={<Login />} exact></Route>
             <Route path="/dashboard" element={<Dashboard />} exact></Route>
+            <Route path="/otpverification" element={<VerificationOTP />} exact></Route>
         </Routes>
     </BrowserRouter>
 };

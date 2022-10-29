@@ -1,0 +1,43 @@
+.verification-otp-section {
+    padding: 2rem;
+}
+
+.verification-form-container h1{
+    margin: 1rem 0;
+}
+
+.verification-form-steps-container p {
+    padding: .6rem 0;
+}
+.verification-form-steps-container p span {
+    font-weight: var(--font-weight-medium);
+}
+.verification-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.verification-form input{
+    margin: 10px 0;
+    width: 100px;
+    height: 35px;
+    font-family: var(--font-alpha);
+    font-size: var(--h1-font-size);
+    border: none;
+    border-bottom: 1px solid lightgray;
+}
+
+.verification-form input:focus-visible {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid var(--color-first);
+}
+
+.btn-generate-otp {
+    background-color: white;
+    color: var(--color-first);
+    margin: 20px 10px 0 0;
+}
+.btn-generate-otp:disabled {
+    cursor: not-allowed;
+}

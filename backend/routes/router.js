@@ -12,6 +12,7 @@ import getInstitutes from "../controllers/getInstitutes.js";
 import getDashboard from "../controllers/getDashboard.js";
 import postQuestions from "../controllers/postQuestions.js";
 import patchTest from "../controllers/patchTest.js";
+import postSubmission from "../controllers/postSubmission.js";
 
 const router = express.Router();
 
@@ -28,6 +29,7 @@ router.post("/generateOTP", verifyUser, checkUser, postGenerateOTP);
 router.post("/createTest", verifyUser, checkUser, postTest);
 router.post("/addquestions", postQuestions);
 router.patch("/test", verifyUser, checkUser, patchTest);
+router.post("/submission", verifyUser, checkUser, postSubmission);
 
 
 export default router;

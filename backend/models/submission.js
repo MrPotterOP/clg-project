@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const submissionSchema = new mongoose.Schema({
     testId: {type: mongoose.Schema.Types.ObjectId, required: true, unique: true},
+    title: {type: String, required: true},
     student: {type: mongoose.Schema.Types.ObjectId, required: true, unique: true},
     answers: [{type: Number, required: true}],
     score: {

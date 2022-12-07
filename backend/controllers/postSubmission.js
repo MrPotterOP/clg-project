@@ -10,7 +10,7 @@ const postSubission = (req, res) =>{
 
     //Functional Components
 
-    const checkAnswers = (questions)=>{
+    const checkAnswers = (questions, name)=>{
 
 
         const genScore = (doc)=>{
@@ -19,14 +19,14 @@ const postSubission = (req, res) =>{
                 wrong: 0
             }
             doc.forEach((t, i)=>{
-                if(t === answers[i]){
+                if(t.answer === answers[i]){
                     score.right+=1;
                 }else {
                     score.wrong+=1;
                 }
             });
 
-            addSubmission(score);
+            addSubmission(score, name);
         }
 
 
@@ -37,8 +37,9 @@ const postSubission = (req, res) =>{
         });
     }
 
-    const addSubmission = (x) =>{
+    const addSubmission = (x, name) =>{
         const data = {testId: testId,
+        title: name,
         student: _id,
         answers: answers,
         score: {
@@ -59,7 +60,7 @@ const postSubission = (req, res) =>{
 
     }
 
-    const checkSubmission = (id)=>{
+    const checkSubmission = (questions, name)=>{
         // submission.find({testId}, (err, doc)=>{
         //     let checkEntry = false;
         //     if(doc){
@@ -81,7 +82,7 @@ const postSubission = (req, res) =>{
                 return res.status(400).json({msg: "Something Went Wrong."});
             }else if(!doc){
                 // checkAnswers(id);
-                checkAnswers(doc.questions);
+                checkAnswers(questions, name);
             }else{
                 return res.status(406).json({msg: "Already Submmission is done."});
             }
@@ -105,14 +106,14 @@ const postSubission = (req, res) =>{
             if(timeDiff < 0 || timeDiff >= doc.duration){
                 return res.status(400).json({msg: "No submissions can be done at this time."});
             }else{
-                checkSubmission(doc._id);
+                checkSubmission(doc.questions, doc.name);
             }
         }
 }
 
 
     const showTest = ()=>{
-        test.findOne({_id: testID}, (err, doc)=>{
+        test.findOne({_id: testId}, (err, doc)=>{
             if(err){
                 return res.status(400).json({msg: "Test Not Found."});
             }else if(!doc){
@@ -138,10 +139,12 @@ const postSubission = (req, res) =>{
         return res.status(403).json({msg: "User does not have permission to patch test."});
     }else{
 
-        if(!testID || !answers){
+        if(!testId || !answers){
             return res.status(401).json({msg: "Provide Valid Data"});
         }else{
             showTest();
         }
     }
 }
+
+export default postSubission;

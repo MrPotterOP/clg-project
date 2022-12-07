@@ -37,11 +37,11 @@ const Test = ({name ,institute, date, today, days, id, duration, score, upcommin
     }
     //Main JS
     if(institute){
-        link = `performance?id=${id}`;
+        link = `/performance?id=${id}`;
     }else if(upcomming){
-        link = `test?id=${id}`;
+        link = `/test?id=${id}`;
     }else{
-        link = `submission?id=${id}`;
+        link = `/submission?id=${id}`;
     }
 
 

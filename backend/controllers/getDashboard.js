@@ -19,13 +19,13 @@ const getDashboard =  (req, res) =>{
                     const diff = someday.diff(today, 'days');
 
                     if(diff > 0){
-                        upTest.push({id: t._id, name: t.name,today: false, days: diff});
+                        upTest.push({id: t._id, name: t.name,today: false, days: diff, duration: t.duration, date: t.date});
                     }else if(diff === 0){
-                        upTest.push({id: t._id, name: t.name, date: t.date, today: true});
+                        upTest.push({id: t._id, name: t.name, date: t.date, today: true, days: 0, duration: t.duration});
                     }
                 });
 
-                return res.json({prevTest, upTest});
+                return res.json({prevTest, upTest, account: institute});
             }
         })
     }
@@ -49,15 +49,15 @@ const getDashboard =  (req, res) =>{
                 const diff = someday.diff(today, 'days');
 
                 if(diff > 0){
-                    upTest.push({id: t._id, name: t.name, today: false, days: diff});
+                    upTest.push({id: t._id, name: t.name, date: t.date,today: false, days: diff, duration: t.duration});
                 }else if(diff === 0){
-                    upTest.push({id: t._id, name: t.name, date: t.date, today: true});
+                    upTest.push({id: t._id, name: t.name, date: t.date, today: true, duration: t.duration, days: 0});
                 }else if(diff < 0){
-                    prevTest.push({id: t._id, name: t.name, days: diff});
+                    prevTest.push({id: t._id, name: t.name, days: diff, date: t.date});
                 }
             });
 
-            return res.json({prevTest, upTest});
+            return res.json({prevTest, upTest, account: institute});
     }
 
     const genInstituteDashbord = ()=>{

@@ -1,19 +1,32 @@
 import test from "../models/test.js";
+import submission from "../models/submission.js";
 import queset from "../models/queset.js";
 import moment from "moment";
 
 
 const patchTest = (req, res)=>{
     
-    const {verified, institute} = req.user;
+    const {verified, institute, _id} = req.user;
     const {testID} = req.body;
 
     //Functional Components
 
-    const findQuestions = (list)=>{
+    const checkSubmission = (data) =>{
+        submission.findOne({testId: testID, student: _id}, (err, doc)=>{
+            if(err){
+               return res.status(500).json({"msg": "Backend Server is Busy."});
+            }else if(doc){
+                return res.status(401).json({"msg": "Submission is done already."});
+            }else{
+                checkTime(data);
+            }
+        })
+    }
+
+    const findQuestions = (data)=>{
 
         queset.find({
-            '_id': {$in: list}
+            '_id': {$in: data.questions}
         }, (err, doc)=>{
             if(err){
                 return res.status(400).json({msg: "Cannot Find Questions."});
@@ -25,7 +38,7 @@ const patchTest = (req, res)=>{
                 doc.forEach((t)=>{
                     qList.push({question: t.question, options: t.options, id: t._id});
                 });
-                res.json({list: qList, testID});
+                res.json({list: qList, testData:{date: data.date, description: data.description, duration: data.duration, name: data.name}});
             }
         })
     }
@@ -45,7 +58,7 @@ const patchTest = (req, res)=>{
                     if(timeDiff < 0 || timeDiff >= doc.duration){
                         return res.status(400).json({msg: "Test Can not be accessed at this time."});
                     }else{
-                        findQuestions(doc.questions);
+                        findQuestions(doc);
                     }
                 }
     }
@@ -58,7 +71,8 @@ const patchTest = (req, res)=>{
                 return res.status(400).json({msg: "Test Not Found."});
             }else{
                 if(doc.institute === institute){
-                    checkTime(doc);
+                    checkSubmission(doc);
+                    // checkTime(doc);
                 }else{
                     return res.status(401).json({msg:  "No permission to access this test."})
                 }

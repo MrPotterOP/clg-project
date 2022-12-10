@@ -49,7 +49,7 @@ const postSubission = (req, res) =>{
         
         submission.create(data, (err, doc)=>{
             if(err){
-                return res.status(400).json({msg: "submission not acceptable."});
+                return res.status(400).json({msg: "submission not acceptable.", err});
             }else if(!doc){
                 return res.status(400).json({msg: "submission not acceptable."});
             }else{

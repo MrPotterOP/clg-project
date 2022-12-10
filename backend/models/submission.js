@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 const submissionSchema = new mongoose.Schema({
-    testId: {type: mongoose.Schema.Types.ObjectId, required: true, unique: true},
+    testId: {type: String, required: true},
     title: {type: String, required: true},
-    student: {type: mongoose.Schema.Types.ObjectId, required: true, unique: true},
+    student: {type: String, required: true},
     answers: [{type: Number, required: true}],
     score: {
         right: {type: Number, required: true},

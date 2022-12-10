@@ -106,6 +106,9 @@
     outline: none;
     border: 2px solid var(--color-first);
 }
+.difficulty-options-container{
+    cursor: pointer;
+}
 .difficulty-options-container .active{
     padding: 2px;
     display: inline-block;

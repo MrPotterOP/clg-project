@@ -21,7 +21,10 @@ const getDashboard =  (req, res) =>{
                     if(diff > 0){
                         upTest.push({id: t._id, name: t.name,today: false, days: diff, duration: t.duration, date: t.date});
                     }else if(diff === 0){
-                        upTest.push({id: t._id, name: t.name, date: t.date, today: true, days: 0, duration: t.duration});
+                        const diffTime = someday.diff(today, "minutes") * -1;
+                        if(diffTime < t.duration){
+                            upTest.push({id: t._id, name: t.name, date: t.date, today: true, days: 0, duration: t.duration});
+                        }
                     }
                 });
 

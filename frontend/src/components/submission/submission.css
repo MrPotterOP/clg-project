@@ -1,0 +1,31 @@
+.section-submission {
+    padding: 2rem;
+}
+.submissions-score-container {
+    margin: 15px 0;
+}
+.answer-title {
+    font-weight: var(--font-weight-medium);
+}
+.answer-text {
+    padding: .5rem 1rem;
+    background-color: #f5787892;
+}
+.question-container {
+    margin: 20px 0;
+    background-color: #d6d6d6d0;
+}
+.answer-text-correct {
+    padding: .5rem 1rem;
+    background-color: #97f57892;
+}
+
+
+
+@media(min-width: 43.7em){
+    .section-submission {
+        width: 80vw;
+        margin: auto;
+        padding: .5rem;
+    }
+}

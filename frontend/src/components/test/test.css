@@ -1,0 +1,100 @@
+.live-test-container {
+    padding: 2rem;
+}
+.nav-link {
+    margin: 10px 0;
+    text-decoration: underline;
+    color: var(--color-first);
+}
+.live-test-details-container {
+    margin: 10px 0;
+}
+.live-test-note {
+    font-weight: var(--font-weight-medium);
+}
+.live-test-details-container .live-test-note span {
+    color: var(--color-first);
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-weight-bold);
+}
+.test-questions-container {
+    padding: .5rem;
+    background-color: #d6d6d6d0;
+}
+.question-container {
+    padding: .5rem;
+}
+.question-container .question-title-h1 span{
+    font-size: var(--small-font-size);
+    font-weight: var(--font-weight-medium);
+}
+.options-container {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+}
+.options-container .option {
+    margin: 5px 0;
+    background-color: #fcfcfc;
+    padding: .5rem;
+    cursor: pointer;
+}
+.options-container .option:hover{
+    border: 1px solid var(--color-first);
+}
+.options-container .selected {
+    border: 1px solid var(--color-first);
+    background-color: #7889f592;
+}
+.questions-navigate-container {
+    margin: 20px 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.btn-navigate {
+    padding: .5rem;
+    background-color: #fcfcfc;
+    border: 1px solid black;
+    font-family: var(--font-alpha);
+    cursor: pointer;
+}
+.btn-navigate:hover {
+    border: none;
+}
+.questions-navigate-container .next {
+    background-color: rgb(84, 211, 84);
+}
+.questions-navigate-container .previous {
+    background-color: rgb(79, 79, 224);
+}
+.btn-navigate:disabled {
+    background-color: rgba(181, 181, 181, 0.904);
+    cursor: not-allowed;
+    border: none;
+}
+
+
+/* Error Test */
+.section-error-page{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+.error-bg-img {
+    width: 450px;
+}
+.error-oops {
+    color: rgb(223, 70, 70);
+    font-size: var(--big-font-size);
+}
+
+@media(min-width: 43.7em){
+    .live-test-container {
+        width: 80vw;
+        margin: auto;
+        padding: .5rem;
+    }
+}
+

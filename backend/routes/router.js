@@ -13,6 +13,8 @@ import getDashboard from "../controllers/getDashboard.js";
 import postQuestions from "../controllers/postQuestions.js";
 import patchTest from "../controllers/patchTest.js";
 import postSubmission from "../controllers/postSubmission.js";
+import patchSubmission from "../controllers/patchSubmission.js";
+import patchPerformance from "../controllers/patchPerformance.js";
 
 const router = express.Router();
 
@@ -30,6 +32,8 @@ router.post("/createTest", verifyUser, checkUser, postTest);
 router.post("/addquestions", postQuestions);
 router.patch("/test", verifyUser, checkUser, patchTest);
 router.post("/submission", verifyUser, checkUser, postSubmission);
+router.patch("/submission", verifyUser, checkUser, patchSubmission);
+router.patch("/performance", verifyUser, checkUser, patchPerformance);
 
 
 export default router;

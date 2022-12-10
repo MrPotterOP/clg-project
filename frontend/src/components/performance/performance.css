@@ -1,0 +1,22 @@
+.performance-container{
+    margin: 15px 0;
+    padding: .5rem;
+}
+
+.student-performance-container {
+    background-color: #d6d6d6d0;
+    padding: 1rem 0 0 0;
+}
+.student-name {
+    margin: 5px 15px;
+    font-size: var(--h2-font-size);
+    font-weight: var(--font-weight-bold);
+}
+.student-score-container {
+    background-color: #bab9b9d0;
+    padding: .5rem;
+}
+.student-score-card {
+    margin: 5px 10px;
+    font-weight: var(--font-weight-medium);
+}

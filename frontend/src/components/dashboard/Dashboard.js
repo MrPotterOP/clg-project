@@ -8,6 +8,7 @@ import "./Dashboard.css";
 //Components
 import InstituteDashboard from "./InstituteDashboard";
 import StudentDashboard from "./StudentDashboard";
+import Loading from "../loading/Loading";
 
 const Dashboard = ()=>{
 
@@ -62,7 +63,7 @@ const Dashboard = ()=>{
         }
     }
     return (<section className="dashboard-section">
-        {data ? <RenderDashboard /> : <h1>Loading..</h1>}
+        {data ? <RenderDashboard /> : <Loading />}
     </section>)
 }
 

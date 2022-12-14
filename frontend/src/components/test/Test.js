@@ -8,6 +8,7 @@ import "./test.css";
 
 import ErrorTest from "./ErrorTest";
 import TestPage from "./TestPage";
+import Loading from "../loading/Loading";
 
 const Test = ()=>{
     const [querry] = useSearchParams();
@@ -54,7 +55,7 @@ const Test = ()=>{
 
 
     return (<>
-        {data ? <ConditionalRender /> : <h1>Loading</h1>}
+        {data ? <ConditionalRender /> : <Loading />}
     </>
     )
 };

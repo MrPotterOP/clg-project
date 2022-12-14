@@ -7,6 +7,7 @@ import ErrorTest from "../test/ErrorTest";
 import Hero from "../dashboard/Hero";
 
 import "./submission.css";
+import Loading from "../loading/Loading";
 
 const Submission = ()=>{
     const [querry] = useSearchParams();
@@ -112,7 +113,7 @@ const Submission = ()=>{
 
 
     return (<>
-        {data ? <ConditionalRender /> : <h1>Loading</h1>}
+        {data ? <ConditionalRender /> : <Loading />}
     </>
     )
 }

@@ -7,6 +7,7 @@ import ErrorTest from "../test/ErrorTest";
 import Hero from "../dashboard/Hero";
 
 import "./performance.css";
+import Loading from "../loading/Loading";
 
 
 const Performance = ()=>{
@@ -92,7 +93,7 @@ const Performance = ()=>{
     }, [id, token]);
 
     return(<>
-        {data ? <ConditionalRender /> : <h1>Loading</h1>}
+        {data ? <ConditionalRender /> : <Loading />}
     </>)
 };
 

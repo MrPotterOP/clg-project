@@ -1,0 +1,19 @@
+.section-navbar nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: lightgray;
+}
+.route-container {
+    display: flex;
+}
+
+.route-container a {
+    color: var(--color-first);
+    margin-right: 10px;
+}
+
+.logout-btn-container p {
+    color: var(--color-first);
+    cursor: pointer;
+}

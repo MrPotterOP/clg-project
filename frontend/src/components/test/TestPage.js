@@ -4,6 +4,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 import Hero from "../dashboard/Hero";
+import Navbar from "../navbar/Navbar";
 
 
 const TestPage = ({data}) =>{
@@ -102,9 +103,9 @@ const TestPage = ({data}) =>{
     return(
         <section className="section-live-test">
             <Hero img={"test-bg"} />
+            <Navbar />
         <div className="live-test-container">
                         <div className="live-test-details-container">
-                        <Link className="nav-link" to="/dashboard">go back to HOME</Link>
                             <h1>{testData.name}</h1>
                             <p>{testData.description}</p>
                         </div>

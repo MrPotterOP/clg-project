@@ -1,32 +1,82 @@
 import React from "react";
-
-import Test from "./Test";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../navbar/Navbar";
 import Hero from "./Hero";
 
 const StudentDashboard = ({data})=>{
     //Data
     const {prevTest, upTest} = data;
 
+    const navigate = useNavigate();
+
     //Components
-    const mapTest = (t)=>{
-        return(<Test key={t.id} name={t.name} upcomming={true} institute={false} date={t.date} today={t.today} days={t.days} id={t.id} duration={t.duration} score={0}/>);
+    const mapPrevTestNew = (item)=>{
+        console.log(item, "ITEM");
+        return(
+            <tr>
+                <td data-label="Name">{item.title}</td>
+                <td data-label="Submitted At">{`${item.submittedAt.split("T")[0]}`}</td>
+                <td data-label="Link" className="table-link" onClick={()=> navigate(`/submission?id=${item._id}`)} >Visit</td>
+            </tr>
+        )
     }
 
-    const mapPrevTest = (t)=>{
-        return(<Test key={t._id} name={t.title} upcomming={false} institute={false} date={t.date} today={t.today} days={t.days} id={t._id} duration={t.duration} score={t.score}/>);
+    const mapUpTestNew = (item) =>{
+        console.log(item);
+
+        return(
+            <tr>
+                <td data-label="Name">{item.name}</td>
+                <td data-label="Scheduled On">{`${item.date.day}/${item.date.month}/${item.date.year}`}</td>
+                <td data-label="At">{`${item.date.time.hour} : ${item.date.time.min}`}</td>
+                <td data-label="Days Left">{item.days * -1}</td>
+                <td data-label="Duration">{item.duration} min</td>
+                <td data-label="Link" className="table-link" onClick={()=> navigate(`/test?id=${item.id}`)}>Visit</td>
+            </tr>
+        )
+
     }
 
     const DashboardSection = ()=>{
         return (
             <section className="section-dashboard">
                 <Hero />
+                <Navbar />
                 <div className="test-container">
-                    <h1>Upcomming Tests</h1>
-                    {(upTest.length === 0) ? <p className="no-test-font-text">0 Upcomming Tests</p> : upTest.map((t)=> mapTest(t))}
+                    <table>
+                        <caption>Upcomming Tests</caption>
+                        <thead>
+                            <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Scheduled On</th>
+                            <th scope="col">At</th>
+                            <th scope="col">Days Left</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {(upTest.length === 0) ? <p>0 Upcomming Tests</p> : upTest.map((t)=> mapUpTestNew(t))}
+                        </tbody>
+                    </table>
+
+
                 </div>
                 <div className="test-container">
-                    <h1>Previous Tests</h1>
-                    {(prevTest.length === 0) ? <p className="no-test-font-text">0 Previous Tests Tests</p> : prevTest.map((t)=> mapPrevTest(t))}
+                    <table>
+                        <caption>Previous Tests</caption>
+                        <thead>
+                            <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Submitted At</th>
+                            <th scope="col">Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {(prevTest.length === 0) ? <p>0 Previous Tests Tests</p> : prevTest.map((t)=> mapPrevTestNew(t))}
+                        </tbody>
+                    </table>
+
                 </div>
             </section>
         )

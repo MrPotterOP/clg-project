@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 
 import ErrorTest from "../test/ErrorTest";
 import Hero from "../dashboard/Hero";
+import Navbar from "../navbar/Navbar";
 
 import "./performance.css";
 import Loading from "../loading/Loading";
@@ -42,10 +43,9 @@ const Performance = ()=>{
     const ShowData = ()=>{
         return(<>
             <Hero img={"bg-3"} />
-
+            <Navbar />
             <section className="section-submission">
                 <div className="submissions-score-container">
-                    <Link className="nav-link" to="/dashboard">go back to HOME</Link>
                     <h1>Performance</h1>
                 </div>
                 <p>{data.data.length} students have submitted the test.</p>

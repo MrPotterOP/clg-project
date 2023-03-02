@@ -1,10 +1,11 @@
 import React,{useRef, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Hero from "./Hero";
+import Navbar from "../navbar/Navbar";
 
 
-import Test from "./Test";
 
 
 const InstituteDashboard = ({data})=>{
@@ -15,6 +16,8 @@ const InstituteDashboard = ({data})=>{
 
     //Token
     const token = Cookies.get("token");
+
+    const navigate = useNavigate();
 
     //Inputs
     const title = useRef("");
@@ -152,9 +155,7 @@ const InstituteDashboard = ({data})=>{
                                 </div>
                                 </div>
                             </div>
-
                             <button onClick={() => handleSubmit()} className="btn-login btn-schedule">Schedule Test</button>
-
                         </div>
                     </div> 
                     </div>
@@ -163,26 +164,73 @@ const InstituteDashboard = ({data})=>{
         )
     }
 
-    const mapTest = (t)=>{
-        return(<Test key={t.id} name={t.name} upcomming={true} institute={true} date={t.date} today={t.today} days={t.days} id={t.id} duration={t.duration} score={0}/>);
+    const mapPrevTestNew = (item)=>{
+        console.log(item, "ITEM");
+        return(
+            <tr>
+                <td data-label="Name">{item.name}</td>
+                <td data-label="Scheduled On">{`${item.date.day}/${item.date.month}/${item.date.year}`}</td>
+                <td data-label="Submitted">{item.days * -1} days ago</td>
+                <td data-label="Link" className="table-link" onClick={()=> navigate(`/performance?id=${item.id}`)} >Visit</td>
+            </tr>
+        )
     }
 
-    const mapPrevTest = (t)=>{
-        return(<Test key={t.id} name={t.name} upcomming={false} institute={true} date={t.date} today={t.today} days={t.days} id={t.id} duration={t.duration} score={0}/>);
+    const mapUpTestNew = (item)=>{
+        console.log(item);
+        return(
+            <tr>
+                <td data-label="Name">{item.name}</td>
+                <td data-label="Scheduled On">{`${item.date.day}/${item.date.month}/${item.date.year}`}</td>
+                <td data-label="At">{`${item.date.time.hour} : ${item.date.time.min}`}</td>
+                <td data-label="Days Left">{item.days * -1}</td>
+                <td data-label="Duration">{item.duration} min</td>
+                <td data-label="Link" className="table-link" onClick={()=> navigate(`/performance?id=${item.id}`)}>Visit</td>
+            </tr>
+        )
     }
 
     const DashboardSection = ()=>{
         return (
             <section className="section-dashboard">
                 <Hero />
+                <Navbar />
                 <ScheduleTest />
                 <div className="test-container">
-                    <h1>Upcomming Tests</h1>
-                    {(upTest.length === 0) ? <p>0 Upcomming Tests</p> : upTest.map((t)=> mapTest(t))}
+                    <table>
+                        <caption>Upcomming Tests</caption>
+                        <thead>
+                            <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Scheduled On</th>
+                            <th scope="col">At</th>
+                            <th scope="col">Days Left</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {(upTest.length === 0) ? <p>0 Upcomming Tests</p> : upTest.map((t)=> mapUpTestNew(t))}
+                        </tbody>
+                    </table>
+
                 </div>
                 <div className="test-container">
-                    <h1>Previous Tests</h1>
-                    {(prevTest.length === 0) ? <p>0 Previous Tests Tests</p> : prevTest.map((t)=> mapPrevTest(t))}
+                    <table>
+                        <caption>Previous Tests</caption>
+                        <thead>
+                            <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Scheduled On</th>
+                            <th scope="col">Submitted</th>
+                            <th scope="col">Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {(prevTest.length === 0) ? <p>0 Previous Tests Tests</p> : prevTest.map((t)=> mapPrevTestNew(t))}
+                        </tbody>
+                    </table>
+               
                 </div>
             </section>
         )

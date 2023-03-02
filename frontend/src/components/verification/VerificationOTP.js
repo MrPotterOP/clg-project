@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
 
 import "./verificationotp.css";
+import Navbar from "../navbar/Navbar";
 
 
 const VerificationOTP = ()=>{
@@ -40,7 +41,8 @@ const VerificationOTP = ()=>{
     //Components
 
     const Form = ()=>{
-        return(
+        return(<>
+            <Navbar />
             <div className="verification-form-container">
                 <h1>Welcome to OTP Verification.</h1>
                 <p>Here are the few steps, follow them to get verified successfully.</p>
@@ -60,6 +62,7 @@ const VerificationOTP = ()=>{
                 </div>
                 
             </div>
+            </>
         )
     }
 

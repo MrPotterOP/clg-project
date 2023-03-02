@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from "react";
 import axios from "axios";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import ErrorTest from "../test/ErrorTest";
@@ -8,6 +8,7 @@ import Hero from "../dashboard/Hero";
 
 import "./submission.css";
 import Loading from "../loading/Loading";
+import Navbar from "../navbar/Navbar";
 
 const Submission = ()=>{
     const [querry] = useSearchParams();
@@ -46,10 +47,9 @@ const Submission = ()=>{
 
         return(<>
             <Hero img={"bg-3"}/>
-
+            <Navbar />
             <section className="section-submission">
                 <div className="submissions-score-container">
-                    <Link className="nav-link" to="/dashboard">go back to HOME</Link>
                     <h1>Score</h1>
                     <p className="submission-score submission-score-right">Right: <span>{data.score.right}</span></p>
                     <p className="submission-score submission-score-wrong">Wrong: <span>{data.score.wrong}</span></p>

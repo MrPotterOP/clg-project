@@ -19,6 +19,7 @@ const postSubission = (req, res) =>{
                 wrong: 0
             }
             doc.forEach((t, i)=>{
+                console.log(t);
                 if(t.answer === answers[i]){
                     score.right+=1;
                 }else {
@@ -46,6 +47,8 @@ const postSubission = (req, res) =>{
             right: x.right,
             wrong: x.wrong
         }};
+
+        console.log(data, "DDD");
         
         submission.create(data, (err, doc)=>{
             if(err){
@@ -120,11 +123,14 @@ const postSubission = (req, res) =>{
                 return res.status(400).json({msg: "Test Not Found."});
             }else{
                 if(doc.institute === institute){
-                    if(doc.questions.length === answers.length){
-                        checkTime(doc);
-                    }else{
-                        return res.status(400).json({msg: "Invalid answers data provided."})
-                    }
+                    // if(doc.questions.length === answers.length){
+                    //     checkTime(doc);
+                    // }else{
+                    //     return res.status(400).json({msg: "Invalid answers data provided."})
+                    // }
+
+                    checkTime(doc);
+
                 }else{
                     return res.status(401).json({msg:  "No permission to access this test."})
                 }

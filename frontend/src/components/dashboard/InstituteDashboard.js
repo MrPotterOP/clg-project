@@ -10,9 +10,20 @@ import Navbar from "../navbar/Navbar";
 
 const InstituteDashboard = ({data})=>{
     const postUrl = "http://localhost:4000/api/createTest";
+    const putUrl = "http://localhost:4000/api/edittest";
 
     //Data
     const {prevTest, upTest} = data;
+
+
+    const [popup, setPopup] = useState({
+        isOpen: false,
+        details: {time: {}}
+    });
+
+    console.log(popup);
+
+
 
     //Token
     const token = Cookies.get("token");
@@ -30,10 +41,24 @@ const InstituteDashboard = ({data})=>{
     const hour = useRef(0);
     const min = useRef(0);
 
+    const updateDay = useRef(popup.details.day);
+    const updateMonth = useRef(popup.details.month);
+    const updateYear = useRef(popup.details.year);
+    const updateHour = useRef(popup.details.time.hour);
+    const updateMin = useRef(popup.details.time.min);
+
     const [difficulty, setDifficulty] = useState("Easy");
 
 
     //Handlers
+
+    const updateTest = ()=>{
+        axios.put(putUrl, {testID: popup.testID ,update: {date: {day: parseInt(updateDay.current.value), month: parseInt(updateMonth.current.value), year: parseInt(updateYear.current.value), time:{
+            hour: parseInt(updateHour.current.value), min: parseInt(updateMin.current.value)
+        }}}}, {headers: {Authorization: token}})
+        .then((r)=> (r.status === 200) ? setPopup(()=> ({isOpen: false, details: {time: {}}})) : null)
+        .catch((e) => (e.response.data) ? setPopup(()=> ({isOpen: false, details: {time: {}}})) : null)
+    }
 
     const handleError = (res) =>{
         alert(res.msg);
@@ -57,7 +82,6 @@ const InstituteDashboard = ({data})=>{
             questions: parseInt(questions.current.value),
             level: difficulty
         }
-        console.log(inputData);
         axios.post(postUrl, {...inputData}, {headers: {
             "Authorization": token
         }}).then(e => (e.status === 200) ? handleSuccess(e.data) : null)
@@ -76,9 +100,37 @@ const InstituteDashboard = ({data})=>{
     const handleRadioInput = (target) =>{
         setDifficulty(target.innerHTML);
     }
+    
 
 
     //Components
+
+    const Popup = ()=>{
+        return(
+            <div className={popup.isOpen ? "testedit-popup" : "testedit-popup inactive-popup"}>
+                <div className="popup-container">
+                    <div className="popup-date-container">
+                        <p>Date</p>
+                        <div className="dates">
+                        <input className="input-box" ref={updateDay} type="number" placeholder="20" defaultValue={popup.details.day}></input>
+                        <input className="input-box" ref={updateMonth} type="number" placeholder="12" defaultValue={popup.details.month}></input>
+                        <input className="input-box" ref={updateYear} type="number" placeholder="2023" defaultValue={popup.details.year}></input>
+                        </div>
+                    </div>
+                    <div className="popup-time-container">
+                        <p>Time</p>
+                        <input className="input-box" ref={updateHour} type="number" placeholder="20" defaultValue={popup.details.time.hour}></input>
+                        <input className="input-box" ref={updateMin} type="number" placeholder="12" defaultValue={popup.details.time.min}></input>
+                    </div>
+                    <div className="popup-buttons-container">
+                        <button className="btn-login btn-cancel" onClick={() => setPopup(()=> ({isOpen: false, details: {time: {}}}))}>Cancel</button>
+                        <button className="btn-login" onClick={()=> updateTest()}>Update</button>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     const ScheduleTest = ()=>{
         return(
             <section className="section-schedule-test">
@@ -165,7 +217,7 @@ const InstituteDashboard = ({data})=>{
     }
 
     const mapPrevTestNew = (item)=>{
-        console.log(item, "ITEM");
+    
         return(
             <tr>
                 <td data-label="Name">{item.name}</td>
@@ -177,14 +229,15 @@ const InstituteDashboard = ({data})=>{
     }
 
     const mapUpTestNew = (item)=>{
-        console.log(item);
+        
         return(
             <tr>
                 <td data-label="Name">{item.name}</td>
                 <td data-label="Scheduled On">{`${item.date.day}/${item.date.month}/${item.date.year}`}</td>
                 <td data-label="At">{`${item.date.time.hour} : ${item.date.time.min}`}</td>
-                <td data-label="Days Left">{item.days * -1}</td>
+                <td data-label="Days Left">{item.days}</td>
                 <td data-label="Duration">{item.duration} min</td>
+                <td data-label="Edit" className="table-link" onClick={()=> setPopup(()=> ({testID: item.id, isOpen: true, details: item.date}))}>Edit Test</td>
                 <td data-label="Link" className="table-link" onClick={()=> navigate(`/performance?id=${item.id}`)}>Visit</td>
             </tr>
         )
@@ -194,6 +247,7 @@ const InstituteDashboard = ({data})=>{
         return (
             <section className="section-dashboard">
                 <Hero />
+                <Popup />
                 <Navbar />
                 <ScheduleTest />
                 <div className="test-container">
@@ -206,6 +260,7 @@ const InstituteDashboard = ({data})=>{
                             <th scope="col">At</th>
                             <th scope="col">Days Left</th>
                             <th scope="col">Duration</th>
+                            <th scope="col">Edit</th>
                             <th scope="col">Link</th>
                             </tr>
                         </thead>

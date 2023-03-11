@@ -4,7 +4,7 @@ const submissionSchema = new mongoose.Schema({
     testId: {type: String, required: true},
     title: {type: String, required: true},
     student: {type: String, required: true},
-    answers: [{type: Number, required: true}],
+    answers: [{type: Number}],
     score: {
         right: {type: Number, required: true},
         wrong: {type: Number, required: true}

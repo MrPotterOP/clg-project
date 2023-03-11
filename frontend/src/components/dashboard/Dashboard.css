@@ -94,7 +94,7 @@
 .schedule-test-small-input-box p {
     padding: 5px;
 }
-.schedule-test-small-input-box .input-box{
+ .input-box{
     width: 80px;
     padding: 5px;
     margin: 10px 0 0 0;
@@ -254,3 +254,40 @@ table {
         align-items: center;
     }
 }
+
+.testedit-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.inactive-popup {
+    top: -100%;
+}
+
+.popup-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 35px;
+}
+
+.popup-date-container .dates{
+    display: flex;
+}
+.popup-buttons-container {
+    display: flex;
+    column-gap: 20px;
+}
+.popup-buttons-container .btn-cancel {
+    background-color: var(--color-white);
+    color: var(--color-first);
+    box-shadow: none;
+    border: 1px solid var(--color-first);
+}
+
+

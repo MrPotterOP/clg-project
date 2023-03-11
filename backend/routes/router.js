@@ -15,6 +15,7 @@ import patchTest from "../controllers/patchTest.js";
 import postSubmission from "../controllers/postSubmission.js";
 import patchSubmission from "../controllers/patchSubmission.js";
 import patchPerformance from "../controllers/patchPerformance.js";
+import putEditTest from "../controllers/putEditTest.js";
 
 const router = express.Router();
 
@@ -34,6 +35,7 @@ router.patch("/test", verifyUser, checkUser, patchTest);
 router.post("/submission", verifyUser, checkUser, postSubmission);
 router.patch("/submission", verifyUser, checkUser, patchSubmission);
 router.patch("/performance", verifyUser, checkUser, patchPerformance);
+router.put("/edittest", verifyUser, checkUser, putEditTest);
 
 
 export default router;

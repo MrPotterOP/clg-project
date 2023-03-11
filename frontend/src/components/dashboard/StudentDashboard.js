@@ -11,7 +11,7 @@ const StudentDashboard = ({data})=>{
 
     //Components
     const mapPrevTestNew = (item)=>{
-        console.log(item, "ITEM");
+        
         return(
             <tr>
                 <td data-label="Name">{item.title}</td>
@@ -22,7 +22,7 @@ const StudentDashboard = ({data})=>{
     }
 
     const mapUpTestNew = (item) =>{
-        console.log(item);
+        
 
         return(
             <tr>
@@ -31,7 +31,7 @@ const StudentDashboard = ({data})=>{
                 <td data-label="At">{`${item.date.time.hour} : ${item.date.time.min}`}</td>
                 <td data-label="Days Left">{item.days * -1}</td>
                 <td data-label="Duration">{item.duration} min</td>
-                <td data-label="Link" className="table-link" onClick={()=> navigate(`/test?id=${item.id}`)}>Visit</td>
+                <td data-label="Link" className="table-link" onClick={()=> navigate(`/test?id=${item.id}`)}>Start Test</td>
             </tr>
         )
 
